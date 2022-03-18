@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="iris.data">
+    <None Update="Data\iris.data">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="iris.test.data">
+    <None Update="Data\iris.test.data">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
