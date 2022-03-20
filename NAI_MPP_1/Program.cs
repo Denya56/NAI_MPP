@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using NAI_MPP_1.SourceFiles;
 
 namespace NAI_MPP_1
 {
@@ -7,7 +7,25 @@ namespace NAI_MPP_1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter k: ");
+            Menu menu = new Menu();
+            menu.MainMenu();
+            
+
+            /*while (true)
+            {
+                
+                    switch (Console.ReadLine())
+                    {
+                        case "1":
+                            menu.currentState = "SM";
+                            break;
+                        case "2":
+                            menu.currentState = "Graph";
+                            break;
+                    }
+            }*/
+
+            /*Console.WriteLine("Enter k: ");
             int k = int.Parse(Console.ReadLine());
 
             KNN_AI ai = new KNN_AI(k, "Data/iris.data", "Data/iris.test.data");
@@ -42,7 +60,7 @@ namespace NAI_MPP_1
             {
                 Console.WriteLine(ai.testResults[i] + "\t" + ai.testAnswers[i]);
 
-            }
+            }*/
         }
     }
 }
