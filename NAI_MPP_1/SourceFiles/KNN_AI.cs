@@ -46,7 +46,7 @@ namespace NAI_MPP_1.SourceFiles
         public void Run(int option)
         {
             Dictionary<double[], string> vectorDistanceAndAnswer = new Dictionary<double[], string>();
-            List<string> sortedAnswers;
+            List<string> sortedAnswers = new List<string>();
             string most;
             switch (option)
             {
@@ -58,7 +58,7 @@ namespace NAI_MPP_1.SourceFiles
                             vectorDistanceAndAnswer.Add(CalculateVectorsDistance(vectorTest.Key, vectorLearn.Key), vectorLearn.Value);
                         }
 
-                        /*foreach (KeyValuePair<double[], string> kvp in vectorDistance)
+                        /*foreach (KeyValuePair<double[], string> kvp in vectorDistanceAndAnswer)
                         {
                             //textBox3.Text += ("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
                             Console.WriteLine("Key = {0}, Value = {1}", kvp.Key.ToArray()[0], kvp.Value);
@@ -81,18 +81,27 @@ namespace NAI_MPP_1.SourceFiles
 
 
                         //Console.WriteLine(most);
-                        sortedAnswers = vectorDistanceAndAnswer.OrderBy(a => a.Key[0]).Select(x => x.Value).Take(k).ToList();
+
+                        sortedAnswers = vectorDistanceAndAnswer.OrderBy(a => a.Key[0]).Select(x => x.Value).ToList();
+
+                        /*for (int i = 0; i < sortedAnswers.Count; i++)
+                        {
+                            string ss = sortedAnswers[i];
+                            Console.WriteLine(i + ". " + ss);
+                        }*/
                         most = sortedAnswers.GroupBy(i => i).Select(grp => grp.Key).First();
                         results.Add(most);
+                        vectorDistanceAndAnswer.Clear();
                     }
+
                     break;
                 case 2:
                     int dataSize = learnData.Keys.ToArray()[0].Length - 1;
-                    Console.WriteLine("Input data in format: {0}{1}", 
+                    Console.WriteLine("Input data in format: {0}{1}",
                                       String.Concat(Enumerable.Repeat("double,", dataSize)), "double");
                     double d;
                     string[] s = Console.ReadLine().Split(",");
-                    if(s.Length != dataSize && !s.All(n => Double.TryParse(n, out d)))
+                    if (s.Length != dataSize && !s.All(n => Double.TryParse(n, out d)))
                     {
                         Console.WriteLine("Invalid input");
                         break;
@@ -105,9 +114,9 @@ namespace NAI_MPP_1.SourceFiles
                     sortedAnswers = vectorDistanceAndAnswer.OrderBy(a => a.Key[0]).Select(x => x.Value).Take(k).ToList();
                     most = sortedAnswers.GroupBy(i => i).Select(grp => grp.Key).First();
                     results.Add(most);
+                    vectorDistanceAndAnswer.Clear();
                     break;
             }
-            
         }
 
         private double[] CalculateVectorsDistance(double[] vec_1, double[] vec_2)

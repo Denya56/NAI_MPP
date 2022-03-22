@@ -33,10 +33,10 @@ namespace NAI_MPP_1.SourceFiles
                     break;
             }
 
-            for (int i = 0; i < ai.results.Count; i++)
+            /*for (int i = 0; i < ai.results.Count; i++)
             {
                 Console.WriteLine(ai.results[i]);
-            }
+            }*/
         }
 
         public void DisplayMenu(int menuState)
