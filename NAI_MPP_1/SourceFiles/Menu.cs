@@ -7,16 +7,18 @@ namespace NAI_MPP_1.SourceFiles
     class Menu
     {
         public string currentState { get; set; }
+        public string learnDataFile { get; set; } = "Data/iris.data";
+        public string testDataFile { get; set; } = "Data/iris.test.data";
         public Menu()
         {
             //currentState = "mainMenu";
         }
 
-        private void Run(int option)
+        private void RunKNN(int option)
         {
             Console.WriteLine("Enter k: ");
             int k = int.Parse(Console.ReadLine());
-            KNN_AI ai = new KNN_AI(k, "Data/iris.data", "Data/iris.test.data");
+            KNN_AI ai = new KNN_AI(k, learnDataFile, testDataFile);
 
             switch (option)
             {
@@ -39,13 +41,21 @@ namespace NAI_MPP_1.SourceFiles
             }*/
         }
 
+        private void RunPerceptron()
+        {
+            Console.WriteLine("Enter bias");
+            int bias = int.Parse(Console.ReadLine());
+            Perceptron p = new Perceptron(learnDataFile, testDataFile, bias, 1);
+            p.Run();
+        }
+
         public void DisplayMenu(int menuState)
         {
             switch (menuState)
             {
                 case 0:
                     Console.WriteLine("1. Start\n" +
-                                  "2. Demo\n" +
+                                  "2. Perceptron\n" +
                                   "3. Exit");
                     break;
                 case 1:
@@ -83,10 +93,10 @@ namespace NAI_MPP_1.SourceFiles
                 switch (choice)
                 {
                     case 1:
-                        StartMenu();
+                        StartMenuKNN();
                         break;
                     case 2:
-                        // do demo option
+                        StartMenuPerceptron();
                         break;
                     case 3:
                         Environment.Exit(0);
@@ -98,7 +108,7 @@ namespace NAI_MPP_1.SourceFiles
             }
         }
 
-        public void StartMenu()
+        public void StartMenuKNN()
         {
             Console.Clear();
             for (int choice = -1; choice !=0;)
@@ -107,12 +117,18 @@ namespace NAI_MPP_1.SourceFiles
 
                 if (choice == 1 || choice == 2)
                 {
-                    Run(choice);
+                    RunKNN(choice);
                     EndMenu();
                 }
                 else
                     Console.WriteLine("Invalid input");
             }
+        }
+
+        public void StartMenuPerceptron()
+        {
+            Console.Clear();
+            RunPerceptron();
         }
 
         public void EndMenu()
@@ -124,7 +140,7 @@ namespace NAI_MPP_1.SourceFiles
                 switch (choice)
                 {
                     case 1:
-                        StartMenu();
+                        StartMenuKNN();
                         break;
                     case 2:
                         MainMenu();
