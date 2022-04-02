@@ -7,8 +7,10 @@ namespace NAI_MPP_1.SourceFiles
     class Menu
     {
         public string currentState { get; set; }
-        public string learnDataFile { get; set; } = "Data/iris.data";
-        public string testDataFile { get; set; } = "Data/iris.test.data";
+        public string KNNlearnDataFile { get; set; } = "Data/iris.data";
+        public string KNNtestDataFile { get; set; } = "Data/iris.test.data";
+        public string PerclearnDataFile { get; set; } = "Data/perceptron.data";
+        public string PerctestDataFile { get; set; } = "Data/perceptron.test.data";
         public Menu()
         {
             //currentState = "mainMenu";
@@ -18,7 +20,7 @@ namespace NAI_MPP_1.SourceFiles
         {
             Console.WriteLine("Enter k: ");
             int k = int.Parse(Console.ReadLine());
-            KNN_AI ai = new KNN_AI(k, learnDataFile, testDataFile);
+            KNN_AI ai = new KNN_AI(k, KNNlearnDataFile, KNNtestDataFile);
 
             switch (option)
             {
@@ -45,7 +47,7 @@ namespace NAI_MPP_1.SourceFiles
         {
             Console.WriteLine("Enter bias");
             int bias = int.Parse(Console.ReadLine());
-            Perceptron p = new Perceptron(learnDataFile, testDataFile, bias, 1);
+            Perceptron p = new Perceptron(PerclearnDataFile, PerctestDataFile, bias, 1);
             p.Run();
         }
 

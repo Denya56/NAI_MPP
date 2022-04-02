@@ -9,7 +9,7 @@ namespace NAI_MPP_1.SourceFiles
     {
         public Dictionary<double[], string> learnData { get; set; }
         public Dictionary<double[], string> testData { get; set; }
-        public List<double> output { get; set; }
+        public List<double> result { get; set; }
         public double[] weightVector { get; set; }
         public double bias { get; set; }
         public double alpha { get; set; } // learning rate
@@ -17,7 +17,7 @@ namespace NAI_MPP_1.SourceFiles
         {
             learnData = ReadData(learnFilePath);
             testData = ReadData(testFilePath);
-            output = new List<double>();
+            result = new List<double>();
 
             weightVector = new double[learnData.Keys.Count];
             var rand = new Random();
@@ -32,14 +32,24 @@ namespace NAI_MPP_1.SourceFiles
 
         public void Run()
         {
-            foreach (var learnVector in learnData)
+            for (int i = 0; i < 3; i++)
             {
-                double output = (DotProduct(learnVector.Key) - bias) >= 1 ? 1 : 0;
-
-                DeltaRuleCalc(learnVector, output);
-                foreach (var v in weightVector)
-                    Console.WriteLine(v);
+                result.Clear();
+                foreach (var learnVector in learnData)
+                {
+                    
+                    double output = (DotProduct(learnVector.Key) - bias) >= 1 ? 1 : 0;
+                    result.Add(output);
+                    DeltaRuleCalc(learnVector, output);
+                    foreach (var v in weightVector)
+                        if (v != 0)
+                            Console.WriteLine(v);
+                    Console.WriteLine(" ");
+                }
+                
             }
+            foreach (var r in result)
+                Console.WriteLine(r);
         }
         private double DotProduct(double[] inputVector)
         {
