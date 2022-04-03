@@ -38,12 +38,8 @@ namespace NAI_MPP_1.SourceFiles
         {
             /*Console.WriteLine("Enter bias");
             int bias = int.Parse(Console.ReadLine());*/
-            Perceptron p = new Perceptron(PerclearnDataFile, PerctestDataFile, 1.5, 0.01, 0.05);
+            Perceptron p = new Perceptron(PerclearnDataFile, PerctestDataFile, 1, 0.01, 0.05);
             p.Run(option);
-
-            
-
-            
         }
 
         public void DisplayMenu(int menuState)
@@ -74,6 +70,7 @@ namespace NAI_MPP_1.SourceFiles
             {
                 Console.WriteLine("Invalid input");
                 DisplayMenu(menuState);
+                
             }
             return int.Parse(choice);
         }
