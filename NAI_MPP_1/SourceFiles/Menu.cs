@@ -115,7 +115,7 @@ namespace NAI_MPP_1.SourceFiles
                 if (choice == 1 || choice == 2)
                 {
                     RunKNN(choice);
-                    EndMenu();
+                    EndMenu(1);
                 }
                 else
                     Console.WriteLine("Invalid input");
@@ -132,14 +132,14 @@ namespace NAI_MPP_1.SourceFiles
                 if (choice == 1 || choice == 2)
                 {
                     RunPerceptron(choice);
-                    EndMenu();
+                    EndMenu(2);
                 }
                 else
                     Console.WriteLine("Invalid input");
             }
         }
 
-        public void EndMenu()
+        public void EndMenu(int option)
         {
             for (int choice = -1; choice != 0;)
             {
@@ -148,7 +148,8 @@ namespace NAI_MPP_1.SourceFiles
                 switch (choice)
                 {
                     case 1:
-                        StartMenuKNN();
+                        if (option == 1) StartMenuKNN();
+                        else StartMenuPerceptron();
                         break;
                     case 2:
                         MainMenu();
