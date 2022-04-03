@@ -38,7 +38,7 @@ namespace NAI_MPP_1.SourceFiles
         {
             /*Console.WriteLine("Enter bias");
             int bias = int.Parse(Console.ReadLine());*/
-            Perceptron p = new Perceptron(PerclearnDataFile, PerctestDataFile, 2, 0.01, 0.085);
+            Perceptron p = new Perceptron(PerclearnDataFile, PerctestDataFile, 1.5, 0.01, 0.05);
             p.Run(option);
 
             
@@ -51,7 +51,7 @@ namespace NAI_MPP_1.SourceFiles
             switch (menuState)
             {
                 case 0:
-                    Console.WriteLine("1. Start\n" +
+                    Console.WriteLine("1. KNN\n" +
                                   "2. Perceptron\n" +
                                   "3. Exit");
                     break;
