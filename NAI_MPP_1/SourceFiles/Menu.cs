@@ -21,34 +21,29 @@ namespace NAI_MPP_1.SourceFiles
             Console.WriteLine("Enter k: ");
             int k = int.Parse(Console.ReadLine());
             KNN_AI ai = new KNN_AI(k, KNNlearnDataFile, KNNtestDataFile);
+            ai.Run(option);
 
-            switch (option)
+
+            /*int countCorrectAnswers = 0;
+            for (int i = 0; i < ai.results.Count; i++)
             {
-                case 1:
-                    ai.Run(1);
-                    for (int i = 0; i < ai.results.Count; i++)
-                    {
-                        Console.WriteLine(ai.results[i] + "\t" + ai.testAnswers[i]);
-                    }
-                    break;
-
-                case 2:
-                    ai.Run(2);
-                    break;
+                if (ai.results[i].Equals(ai.testAnswers[i]))
+                    countCorrectAnswers++;
+                Console.WriteLine(ai.results[i] + "\t" + ai.testAnswers[i]);
             }
-
-            /*for (int i = 0; i < ai.results.Count; i++)
-            {
-                Console.WriteLine(ai.results[i]);
-            }*/
+            Console.WriteLine(countCorrectAnswers / ai.results.Count * 100 + "%");*/
         }
 
-        private void RunPerceptron()
+        private void RunPerceptron(int option)
         {
-            Console.WriteLine("Enter bias");
-            int bias = int.Parse(Console.ReadLine());
-            Perceptron p = new Perceptron(PerclearnDataFile, PerctestDataFile, bias, 1);
-            p.Run();
+            /*Console.WriteLine("Enter bias");
+            int bias = int.Parse(Console.ReadLine());*/
+            Perceptron p = new Perceptron(PerclearnDataFile, PerctestDataFile, 2, 0.01, 0.085);
+            p.Run(option);
+
+            
+
+            
         }
 
         public void DisplayMenu(int menuState)
@@ -113,7 +108,7 @@ namespace NAI_MPP_1.SourceFiles
         public void StartMenuKNN()
         {
             Console.Clear();
-            for (int choice = -1; choice !=0;)
+            for (int choice = -1; choice != 0;)
             {
                 choice = GetChoice(1);
 
@@ -130,7 +125,18 @@ namespace NAI_MPP_1.SourceFiles
         public void StartMenuPerceptron()
         {
             Console.Clear();
-            RunPerceptron();
+            for (int choice = -1; choice != 0;)
+            {
+                choice = GetChoice(1);
+
+                if (choice == 1 || choice == 2)
+                {
+                    RunPerceptron(choice);
+                    EndMenu();
+                }
+                else
+                    Console.WriteLine("Invalid input");
+            }
         }
 
         public void EndMenu()

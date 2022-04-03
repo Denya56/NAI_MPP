@@ -72,6 +72,14 @@ namespace NAI_MPP_1.SourceFiles
                         vectorDistanceAndAnswer.Clear();
                     }
 
+                    int countCorrectAnswers = 0;
+                    for (int i = 0; i < results.Count; i++)
+                    {
+                        if (results[i].Equals(testAnswers[i]))
+                            countCorrectAnswers++;
+                        Console.WriteLine(results[i] + "\t" + testAnswers[i]);
+                    }
+                    Console.WriteLine(countCorrectAnswers / results.Count * 100 + "%");
                     break;
                 case 2:
                     int dataSize = learnData.Keys.ToArray()[0].Length - 1;
@@ -93,6 +101,7 @@ namespace NAI_MPP_1.SourceFiles
                     most = sortedAnswers.GroupBy(i => i).Select(grp => grp.Key).First();
                     results.Add(most);
                     vectorDistanceAndAnswer.Clear();
+                    Console.WriteLine(results.ElementAt(0));
                     break;
             }
         }
