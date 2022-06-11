@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using System.Windows;
 
 namespace NAI_MPP_1.SourceFiles
 {
@@ -27,6 +26,22 @@ namespace NAI_MPP_1.SourceFiles
                     }
                 }
             }
+            return data;
+        }
+        protected List<List<string>> ReadDataNaiveBayes(string filePath)
+        {
+            FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            var data = new List<List<string>>();
+
+            using (StreamReader sr = new StreamReader(fs))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    data.Add(line.Split(",").ToList());
+                }
+            }
+
             return data;
         }
     }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NAI_MPP_1.SourceFiles
 {
@@ -11,6 +9,8 @@ namespace NAI_MPP_1.SourceFiles
         public string KNNtestDataFile { get; set; } = "Data/iris.test.data";
         public string PerclearnDataFile { get; set; } = "Data/perceptron.data";
         public string PerctestDataFile { get; set; } = "Data/perceptron.test.data";
+        public string NaivelearnDataFile { get; set; } = "Data/agaricus-lepiota.test.data";
+        public string NaivetestDataFile { get; set; } = "Data/agaricus-lepiota.data";
         public Menu()
         {
             //currentState = "mainMenu";
@@ -36,10 +36,23 @@ namespace NAI_MPP_1.SourceFiles
 
         private void RunPerceptron(int option)
         {
-            /*Console.WriteLine("Enter bias");
-            int bias = int.Parse(Console.ReadLine());*/
-            Perceptron p = new Perceptron(PerclearnDataFile, PerctestDataFile, 1, 0.01, 0.05);
+            /*Console.WriteLine("Enter alpha");
+            double alpha = double.Parse(Console.ReadLine());*/
+            Perceptron p = new Perceptron(PerclearnDataFile, PerctestDataFile, 1, 0.01, 2);
             p.Run(option);
+        }
+
+        private void RunNaive()
+        {
+            /*Console.WriteLine("Enter alpha");
+            double alpha = double.Parse(Console.ReadLine());*/
+            NaiveBayes np = new NaiveBayes(NaivelearnDataFile, NaivetestDataFile);
+            
+            np.Run();
+            foreach (var item in np.result)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         public void DisplayMenu(int menuState)
@@ -49,7 +62,8 @@ namespace NAI_MPP_1.SourceFiles
                 case 0:
                     Console.WriteLine("1. KNN\n" +
                                   "2. Perceptron\n" +
-                                  "3. Exit");
+                                  "3. Naive\n" +
+                                  "4. Exit");
                     break;
                 case 1:
                     Console.WriteLine("1. Run test file\n" +
@@ -70,7 +84,7 @@ namespace NAI_MPP_1.SourceFiles
             {
                 Console.WriteLine("Invalid input");
                 DisplayMenu(menuState);
-                
+
             }
             return int.Parse(choice);
         }
@@ -93,6 +107,9 @@ namespace NAI_MPP_1.SourceFiles
                         StartMenuPerceptron();
                         break;
                     case 3:
+                        StartMenuNaive();
+                        break;
+                    case 4:
                         Environment.Exit(0);
                         break;
                     default:
@@ -134,6 +151,14 @@ namespace NAI_MPP_1.SourceFiles
                 else
                     Console.WriteLine("Invalid input");
             }
+        }
+        public void StartMenuNaive()
+        {
+            Console.Clear();
+            
+            RunNaive();
+            EndMenu(2);
+
         }
 
         public void EndMenu(int option)

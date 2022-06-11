@@ -83,7 +83,7 @@ namespace NAI_MPP_1.SourceFiles
         }
         private void Learn()
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 learnResults.Clear();
                 foreach (var learnVector in learnData)
